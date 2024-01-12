@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Example with Dynamic Row Insertion and Deletion</title>
+</head>
+
+<body>
+    <table border="1" id="fax">
+        <tbody>
+            <tr>
+                <td>Row 1, Col1</td>
+                <td>Row 1, Col2</td>
+            </tr>
+            <tr>
+                <td>Row 2, Col1</td>
+                <td>Row 2, Col2</td>
+            </tr>
+            <tr>
+                <td>Row 3, Col1</td>
+                <td>Row 3, Col2</td>
+            </tr>
+            <tr>
+                <td>Row 4, Col1</td>
+                <td>Row 4, Col2</td>
+            </tr>
+            <tr>
+                <td>Row 5, Col1</td>
+                <td>Row 5, Col2</td>
+            </tr>
+        </tbody>
+    </table>
+    <button onclick="insertRow()">Insert Row</button>
+    <button onclick="deleteLastRow()">Delete Last Row</button>
+    <button onclick="deleteRowFromTop()">Delete Row From Top</button>
+    <p id="messageLabel">Message: No More Rows To Delete</p>
+
+    <script>
+        var counter = 6;
+
+        function insertRow() {
+            var table = document.getElementById("fax").getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+
+            var cell1 = newRow.insertCell(0);
+            var cell2 = newRow.insertCell(1);
+
+            cell1.innerHTML = "row" + counter + ",Col1";
+            cell2.innerHTML = "row" + counter + ",Col2";
+            counter = counter + 1;
+            var messageLabel = document.getElementById("");
+
+        }
+
+        function deleteLastRow() {
+            var table = document.getElementById("fax").getElementsByTagName('tbody')[0];
+            var rowCount = table.rows.length;
+
+            if (rowCount > 0) {
+                table.deleteRow(rowCount - 1);
+            }
+            updateMessage();
+        }
+
+        function deleteRowFromTop() {
+            var table = document.getElementById("fax").getElementsByTagName('tbody')[0];
+            if (table.rows.length > 0) {
+                table.deleteRow(0);
+            }
+            updateMessage();
+        }
+
+        function updateMessage() {
+            var table = document.getElementById("fax").getElementsByTagName('tbody')[0];
+            var messageLabel = document.getElementById("messageLabel");
+
+            messageLabel.style.display = table.rows.length === 0 ? "block" : "none";
+        }
+    </script>
+</body>
+
+</html>
